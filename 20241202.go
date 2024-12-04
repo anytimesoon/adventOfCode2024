@@ -41,7 +41,36 @@ func dec02first() {
 }
 
 func dec02Bonus() {
-	fmt.Println("nothing yet")
+	safe := 0
+
+	for _, arr := range input02 {
+		multiplier := 1
+		dampener := 0
+
+		for i := 0; i < len(arr); i++ {
+			if i == len(arr)-1 {
+				safe++
+				break
+			}
+			diff := arr[i] - arr[i+1]
+
+			if i == 0 && diff < 0 {
+				multiplier = -1
+			}
+
+			diff *= multiplier
+
+			if diff < 1 || diff > 3 {
+				if dampener == 0 {
+					dampener++
+					continue
+				}
+				break
+			}
+		}
+	}
+
+	fmt.Println(safe)
 }
 
 var input02 = [][]int{
